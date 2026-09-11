@@ -1,23 +1,18 @@
-// CLOCK
+```javascript
+// ========================================
+// DIGITAL CLOCK
+// ========================================
 
 function updateClock() {
 
-    let now = new Date();
+    const now = new Date();
 
     let hours = String(now.getHours()).padStart(2, "0");
     let minutes = String(now.getMinutes()).padStart(2, "0");
     let seconds = String(now.getSeconds()).padStart(2, "0");
 
     document.getElementById("clock").innerText =
-        hours + ":" + minutes + ":" + seconds;
-
-    document.getElementById("date").innerText =
-        now.toLocaleDateString("en-IN", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
+        `${hours}:${minutes}:${seconds}`;
 }
 
 setInterval(updateClock, 1000);
@@ -25,15 +20,20 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
+// ========================================
 // TASK MANAGEMENT
+// ========================================
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let tasks =
+    JSON.parse(localStorage.getItem("timeflowTasks")) || [];
+
+let currentFilter = "all";
 
 
 function saveTasks() {
 
     localStorage.setItem(
-        "tasks",
+        "timeflowTasks",
         JSON.stringify(tasks)
     );
 }
@@ -41,27 +41,31 @@ function saveTasks() {
 
 function addTask() {
 
-    let input =
+    const input =
         document.getElementById("taskInput");
 
-    let priority =
+    const priority =
         document.getElementById("priority");
 
-    let name = input.value.trim();
+    const taskName =
+        input.value.trim();
 
-    if (name === "") {
+
+    if (taskName === "") {
 
         alert("Please enter a task.");
+
+        input.focus();
 
         return;
     }
 
 
-    let task = {
+    const task = {
 
         id: Date.now(),
 
-        name: name,
+        name: taskName,
 
         priority: priority.value,
 
@@ -81,62 +85,115 @@ function addTask() {
 
 function displayTasks() {
 
-    let list =
+    const taskList =
         document.getElementById("taskList");
 
-    list.innerHTML = "";
+
+    taskList.innerHTML = "";
 
 
-    tasks.forEach(function(task) {
-
-        let div =
-            document.createElement("div");
-
-        div.className = "task";
+    let filteredTasks = tasks;
 
 
-        div.innerHTML = `
+    if (currentFilter === "pending") {
 
-            <div class="task-left">
+        filteredTasks =
+            tasks.filter(task => !task.completed);
+    }
 
-                <input
-                    type="checkbox"
-                    ${task.completed ? "checked" : ""}
-                    onchange="completeTask(${task.id})"
-                >
 
-                <span class="
-                    ${task.completed ? "completed" : ""}
-                ">
-                    ${task.name}
-                </span>
+    if (currentFilter === "completed") {
 
-                <small>
-                    ${task.priority}
-                </small>
+        filteredTasks =
+            tasks.filter(task => task.completed);
+    }
 
+
+    if (filteredTasks.length === 0) {
+
+        taskList.innerHTML = `
+            <div class="empty-task">
+                <p>No tasks found.</p>
             </div>
-
-            <button
-                class="delete"
-                onclick="deleteTask(${task.id})">
-                Delete
-            </button>
         `;
 
+    } else {
 
-        list.appendChild(div);
+        filteredTasks.forEach(task => {
 
-    });
+            const taskDiv =
+                document.createElement("div");
+
+
+            taskDiv.className = "task";
+
+
+            let priorityClass =
+                task.priority.toLowerCase();
+
+
+            taskDiv.innerHTML = `
+
+                <div class="task-left">
+
+                    <input
+                        type="checkbox"
+                        ${task.completed ? "checked" : ""}
+                        onchange="completeTask(${task.id})"
+                    >
+
+                    <span class="
+                        task-name
+                        ${task.completed ? "completed" : ""}
+                    ">
+                        ${escapeHTML(task.name)}
+                    </span>
+
+                    <span class="
+                        priority
+                        ${priorityClass}
+                    ">
+                        ${task.priority}
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="delete"
+                    onclick="deleteTask(${task.id})"
+                    title="Delete task">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+            `;
+
+
+            taskList.appendChild(taskDiv);
+
+        });
+    }
 
 
     updateStatistics();
 }
 
 
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
 function completeTask(id) {
 
-    tasks.forEach(function(task) {
+    tasks.forEach(task => {
 
         if (task.id === id) {
 
@@ -155,11 +212,7 @@ function completeTask(id) {
 function deleteTask(id) {
 
     tasks =
-        tasks.filter(function(task) {
-
-            return task.id !== id;
-
-        });
+        tasks.filter(task => task.id !== id);
 
 
     saveTasks();
@@ -168,69 +221,99 @@ function deleteTask(id) {
 }
 
 
+function filterTasks(filter, button) {
+
+    currentFilter = filter;
+
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(btn => {
+
+            btn.classList.remove("active-filter");
+
+        });
+
+
+    button.classList.add("active-filter");
+
+
+    displayTasks();
+}
+
+
 function updateStatistics() {
 
-    let total = tasks.length;
-
-    let completed =
-        tasks.filter(function(task) {
-
-            return task.completed;
-
-        }).length;
+    const total =
+        tasks.length;
 
 
-    let pending =
+    const completed =
+        tasks.filter(
+            task => task.completed
+        ).length;
+
+
+    const pending =
         total - completed;
 
 
-    let percentage =
+    const percentage =
         total === 0
         ? 0
         : Math.round(
-            completed / total * 100
+            (completed / total) * 100
         );
 
 
     document.getElementById("total")
         .innerText = total;
 
+
     document.getElementById("completed")
         .innerText = completed;
+
 
     document.getElementById("pending")
         .innerText = pending;
 
+
     document.getElementById("percentage")
         .innerText = percentage + "%";
+
+
+    document.getElementById("taskCount")
+        .innerText =
+        `${total} ${total === 1 ? "task" : "tasks"}`;
 }
 
 
 displayTasks();
 
 
+// ========================================
 // POMODORO TIMER
+// ========================================
 
-let time = 25 * 60;
+let timeLeft = 25 * 60;
 
 let timerInterval = null;
 
 
 function updateTimer() {
 
-    let minutes =
-        Math.floor(time / 60);
+    const minutes =
+        Math.floor(timeLeft / 60);
 
-    let seconds =
-        time % 60;
+    const seconds =
+        timeLeft % 60;
 
 
     document.getElementById("timer")
         .innerText =
 
-        String(minutes).padStart(2, "0")
-        + ":" +
-        String(seconds).padStart(2, "0");
+        `${String(minutes).padStart(2, "0")}:` +
+        `${String(seconds).padStart(2, "0")}`;
 }
 
 
@@ -243,11 +326,11 @@ function startTimer() {
 
 
     timerInterval =
-        setInterval(function() {
+        setInterval(() => {
 
-            if (time > 0) {
+            if (timeLeft > 0) {
 
-                time--;
+                timeLeft--;
 
                 updateTimer();
 
@@ -257,7 +340,9 @@ function startTimer() {
 
                 timerInterval = null;
 
-                alert("Focus session completed!");
+                alert(
+                    "🎉 Focus session completed!"
+                );
             }
 
         }, 1000);
@@ -278,10 +363,27 @@ function resetTimer() {
 
     timerInterval = null;
 
-    time = 25 * 60;
+    timeLeft = 25 * 60;
 
     updateTimer();
 }
 
 
 updateTimer();
+
+
+// ========================================
+// ENTER KEY FOR ADD TASK
+// ========================================
+
+document
+    .getElementById("taskInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            addTask();
+        }
+    });
+```
+
