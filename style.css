@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #202437;
+}
+
+
+/* HEADER */
+
+header {
+    height: 70px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    border-bottom: 1px solid #ddd;
+}
+
+header h2 span {
+    color: #5b5cf0;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+}
+
+nav a:hover {
+    color: #5b5cf0;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 430px;
+    padding: 70px 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-text {
+    max-width: 650px;
+}
+
+.hero-text > p:first-child,
+.tasks > p,
+.schedule > p,
+.focus > p {
+    color: #5b5cf0;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: #5b5cf0;
+    display: block;
+}
+
+.hero-text p:last-child {
+    color: #777;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* CLOCK */
+
+.clock-box {
+    background: #5b5cf0;
+    color: white;
+
+    padding: 45px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    min-width: 300px;
+}
+
+.clock-box h2 {
+    font-size: 38px;
+    margin: 15px 0;
+}
+
+
+/* STATISTICS */
+
+.statistics {
+    width: 84%;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.statistics div {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    border: 1px solid #ddd;
+}
+
+.statistics h2 {
+    color: #5b5cf0;
+    font-size: 32px;
+}
+
+.statistics p {
+    color: #777;
+    margin-top: 8px;
+}
+
+
+/* TASKS */
+
+.tasks,
+.schedule,
+.focus {
+    width: 84%;
+    max-width: 1200px;
+
+    margin: 90px auto;
+}
+
+.tasks h2,
+.schedule h2,
+.focus h2 {
+    font-size: 35px;
+    margin: 15px 0 25px;
+}
+
+
+/* INPUT */
+
+.task-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.task-input input,
+.task-input select {
+    padding: 14px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+}
+
+.task-input input {
+    flex: 1;
+}
+
+button {
+    background: #5b5cf0;
+
+    color: white;
+
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+/* TASK */
+
+.task {
+    background: white;
+
+    padding: 18px;
+
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border: 1px solid #ddd;
+}
+
+.task-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.task-left input {
+    width: 18px;
+    height: 18px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.delete {
+    background: #ef4444;
+}
+
+
+/* SCHEDULE */
+
+.schedule-item {
+    background: white;
+
+    padding: 20px;
+
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    gap: 30px;
+
+    border-left: 4px solid #5b5cf0;
+}
+
+.schedule-item strong {
+    color: #5b5cf0;
+}
+
+.schedule-item p {
+    color: #777;
+
+    margin-top: 5px;
+}
+
+
+/* TIMER */
+
+.focus {
+    text-align: center;
+}
+
+.timer {
+    background: white;
+
+    padding: 50px;
+
+    border-radius: 20px;
+
+    border: 1px solid #ddd;
+}
+
+.timer h1 {
+    font-size: 70px;
+
+    margin-bottom: 25px;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #202437;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px;
+}
+
+
+/* MOBILE */
+
+@media(max-width: 800px) {
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .clock-box {
+        width: 100%;
+    }
+
+    .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task-input {
+        flex-direction: column;
+    }
+
+    nav {
+        display: none;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .hero,
+    .tasks,
+    .schedule,
+    .focus {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
