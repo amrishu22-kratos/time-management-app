@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Time Management App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h2>Time<span>Flow</span></h2>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#tasks">Tasks</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#focus">Focus</a>
+        </nav>
+    </header>
+
+
+    <section id="home" class="hero">
+
+        <div class="hero-text">
+
+            <p>TIME MANAGEMENT</p>
+
+            <h1>
+                Manage Your Time.
+                <span>Achieve Your Goals.</span>
+            </h1>
+
+            <p>
+                Plan your day, manage your tasks and stay focused
+                with TimeFlow.
+            </p>
+
+        </div>
+
+
+        <div class="clock-box">
+
+            <p>Current Time</p>
+
+            <h2 id="clock">00:00:00</h2>
+
+            <p id="date"></p>
+
+        </div>
+
+    </section>
+
+
+    <section class="statistics">
+
+        <div>
+            <h2 id="total">0</h2>
+            <p>Total Tasks</p>
+        </div>
+
+        <div>
+            <h2 id="completed">0</h2>
+            <p>Completed</p>
+        </div>
+
+        <div>
+            <h2 id="pending">0</h2>
+            <p>Pending</p>
+        </div>
+
+        <div>
+            <h2 id="percentage">0%</h2>
+            <p>Progress</p>
+        </div>
+
+    </section>
+
+
+    <section id="tasks" class="tasks">
+
+        <p>MY TASKS</p>
+
+        <h2>Today's Tasks</h2>
+
+
+        <div class="task-input">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter your task"
+            >
+
+            <select id="priority">
+
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+
+            </select>
+
+            <button onclick="addTask()">
+                Add Task
+            </button>
+
+        </div>
+
+
+        <div id="taskList"></div>
+
+    </section>
+
+
+    <section id="schedule" class="schedule">
+
+        <p>DAILY PLAN</p>
+
+        <h2>Today's Schedule</h2>
+
+
+        <div class="schedule-item">
+
+            <strong>08:00 AM</strong>
+
+            <div>
+                <h3>Morning Routine</h3>
+                <p>Start your day productively.</p>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <strong>10:00 AM</strong>
+
+            <div>
+                <h3>Study / Work</h3>
+                <p>Work on your important tasks.</p>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <strong>01:00 PM</strong>
+
+            <div>
+                <h3>Lunch Break</h3>
+                <p>Take some time to relax.</p>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <strong>04:00 PM</strong>
+
+            <div>
+                <h3>Task Review</h3>
+                <p>Check your daily progress.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="focus" class="focus">
+
+        <p>FOCUS MODE</p>
+
+        <h2>Pomodoro Timer</h2>
+
+        <div class="timer">
+
+            <h1 id="timer">25:00</h1>
+
+            <button onclick="startTimer()">Start</button>
+
+            <button onclick="pauseTimer()">Pause</button>
+
+            <button onclick="resetTimer()">Reset</button>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>© 2026 TimeFlow</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
