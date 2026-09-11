@@ -1,206 +1,488 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Time Management App</title>
+    <title>TimeFlow - Time Management</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 </head>
 
 <body>
 
-    <header>
-        <h2>Time<span>Flow</span></h2>
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+                <h2>TimeFlow</h2>
+                <small>Productivity</small>
+            </div>
+        </div>
+
+        <div class="menu-title">MENU</div>
 
         <nav>
-            <a href="#home">Home</a>
-            <a href="#tasks">Tasks</a>
-            <a href="#schedule">Schedule</a>
-            <a href="#focus">Focus</a>
+
+            <a href="#dashboard" class="active">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="#tasks">
+                <i class="fa-solid fa-list-check"></i>
+                My Tasks
+            </a>
+
+            <a href="#schedule">
+                <i class="fa-solid fa-calendar-days"></i>
+                Schedule
+            </a>
+
+            <a href="#focus">
+                <i class="fa-solid fa-bullseye"></i>
+                Focus Timer
+            </a>
+
         </nav>
-    </header>
 
+        <div class="sidebar-bottom">
 
-    <section id="home" class="hero">
+            <div class="quote">
+                <i class="fa-solid fa-quote-left"></i>
 
-        <div class="hero-text">
-
-            <p>TIME MANAGEMENT</p>
-
-            <h1>
-                Manage Your Time.
-                <span>Achieve Your Goals.</span>
-            </h1>
-
-            <p>
-                Plan your day, manage your tasks and stay focused
-                with TimeFlow.
-            </p>
-
-        </div>
-
-
-        <div class="clock-box">
-
-            <p>Current Time</p>
-
-            <h2 id="clock">00:00:00</h2>
-
-            <p id="date"></p>
-
-        </div>
-
-    </section>
-
-
-    <section class="statistics">
-
-        <div>
-            <h2 id="total">0</h2>
-            <p>Total Tasks</p>
-        </div>
-
-        <div>
-            <h2 id="completed">0</h2>
-            <p>Completed</p>
-        </div>
-
-        <div>
-            <h2 id="pending">0</h2>
-            <p>Pending</p>
-        </div>
-
-        <div>
-            <h2 id="percentage">0%</h2>
-            <p>Progress</p>
-        </div>
-
-    </section>
-
-
-    <section id="tasks" class="tasks">
-
-        <p>MY TASKS</p>
-
-        <h2>Today's Tasks</h2>
-
-
-        <div class="task-input">
-
-            <input
-                type="text"
-                id="taskInput"
-                placeholder="Enter your task"
-            >
-
-            <select id="priority">
-
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-
-            </select>
-
-            <button onclick="addTask()">
-                Add Task
-            </button>
-
-        </div>
-
-
-        <div id="taskList"></div>
-
-    </section>
-
-
-    <section id="schedule" class="schedule">
-
-        <p>DAILY PLAN</p>
-
-        <h2>Today's Schedule</h2>
-
-
-        <div class="schedule-item">
-
-            <strong>08:00 AM</strong>
-
-            <div>
-                <h3>Morning Routine</h3>
-                <p>Start your day productively.</p>
+                <p>
+                    "The key is not spending time,
+                    but investing it."
+                </p>
             </div>
 
         </div>
 
-
-        <div class="schedule-item">
-
-            <strong>10:00 AM</strong>
-
-            <div>
-                <h3>Study / Work</h3>
-                <p>Work on your important tasks.</p>
-            </div>
-
-        </div>
+    </aside>
 
 
-        <div class="schedule-item">
+    <!-- MAIN -->
+    <main class="main">
 
-            <strong>01:00 PM</strong>
+        <!-- TOPBAR -->
+        <header class="topbar">
 
             <div>
-                <h3>Lunch Break</h3>
-                <p>Take some time to relax.</p>
+                <p class="welcome">GOOD DAY 👋</p>
+                <h1>Welcome back!</h1>
             </div>
 
-        </div>
+            <div class="top-actions">
 
+                <div class="current-time">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="clock">00:00:00</span>
+                </div>
 
-        <div class="schedule-item">
+                <div class="profile">
+                    <div class="avatar">A</div>
 
-            <strong>04:00 PM</strong>
+                    <div>
+                        <strong>My Workspace</strong>
+                        <small>Personal</small>
+                    </div>
+                </div>
 
-            <div>
-                <h3>Task Review</h3>
-                <p>Check your daily progress.</p>
             </div>
 
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+
+            <div class="hero-card">
+
+                <div>
+                    <span class="hero-label">
+                        <i class="fa-solid fa-sparkles"></i>
+                        TODAY'S FOCUS
+                    </span>
+
+                    <h2>
+                        Make today<br>
+                        <span>productive.</span>
+                    </h2>
+
+                    <p>
+                        Organize your tasks and focus on
+                        what matters most.
+                    </p>
+
+                    <a href="#tasks" class="hero-button">
+                        View My Tasks
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="hero-decoration">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Total Tasks</span>
+                        <h3 id="total">0</h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Completed</span>
+                        <h3 id="completed">0</h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+
+                    <div>
+                        <span>Pending</span>
+                        <h3 id="pending">0</h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div>
+                        <span>Progress</span>
+                        <h3 id="percentage">0%</h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT GRID -->
+        <div class="content-grid">
+
+
+            <!-- TASKS -->
+            <section id="tasks" class="panel tasks-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="section-label">PRODUCTIVITY</span>
+                        <h2>Today's Tasks</h2>
+                    </div>
+
+                    <span class="task-count" id="taskCount">
+                        0 tasks
+                    </span>
+
+                </div>
+
+
+                <div class="task-input">
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        <input
+                            type="text"
+                            id="taskInput"
+                            placeholder="What needs to be done?"
+                        >
+
+                    </div>
+
+
+                    <select id="priority">
+
+                        <option value="Low">
+                            Low
+                        </option>
+
+                        <option value="Medium">
+                            Medium
+                        </option>
+
+                        <option value="High">
+                            High
+                        </option>
+
+                    </select>
+
+
+                    <button onclick="addTask()">
+                        Add Task
+                    </button>
+
+                </div>
+
+
+                <div class="filter-bar">
+
+                    <button
+                        class="filter active-filter"
+                        onclick="filterTasks('all', this)">
+                        All
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filterTasks('pending', this)">
+                        Pending
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filterTasks('completed', this)">
+                        Completed
+                    </button>
+
+                </div>
+
+
+                <div id="taskList"></div>
+
+            </section>
+
+
+            <!-- FOCUS TIMER -->
+            <section id="focus" class="panel focus-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <span class="section-label">FOCUS MODE</span>
+                        <h2>Pomodoro</h2>
+                    </div>
+
+                    <i class="fa-solid fa-bolt focus-icon"></i>
+
+                </div>
+
+
+                <div class="timer-circle">
+
+                    <div>
+
+                        <span>FOCUS SESSION</span>
+
+                        <h1 id="timer">
+                            25:00
+                        </h1>
+
+                        <small>
+                            Stay focused
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="timer-buttons">
+
+                    <button
+                        class="timer-start"
+                        onclick="startTimer()">
+                        <i class="fa-solid fa-play"></i>
+                        Start
+                    </button>
+
+                    <button
+                        class="timer-control"
+                        onclick="pauseTimer()">
+                        <i class="fa-solid fa-pause"></i>
+                    </button>
+
+                    <button
+                        class="timer-control"
+                        onclick="resetTimer()">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+
+                </div>
+
+            </section>
+
         </div>
 
-    </section>
+
+        <!-- SCHEDULE -->
+        <section id="schedule" class="panel schedule-panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <span class="section-label">PLAN YOUR DAY</span>
+                    <h2>Today's Schedule</h2>
+                </div>
+
+                <button class="small-button">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Event
+                </button>
+
+            </div>
 
 
-    <section id="focus" class="focus">
+            <div class="timeline">
 
-        <p>FOCUS MODE</p>
+                <div class="timeline-item">
 
-        <h2>Pomodoro Timer</h2>
+                    <div class="time">
+                        08:00
+                        <small>AM</small>
+                    </div>
 
-        <div class="timer">
+                    <div class="timeline-line"></div>
 
-            <h1 id="timer">25:00</h1>
+                    <div class="event">
+                        <div class="event-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
 
-            <button onclick="startTimer()">Start</button>
+                        <div>
+                            <h3>Morning Routine</h3>
+                            <p>Start your day with a productive routine.</p>
+                        </div>
+                    </div>
 
-            <button onclick="pauseTimer()">Pause</button>
-
-            <button onclick="resetTimer()">Reset</button>
-
-        </div>
-
-    </section>
-
-
-    <footer>
-
-        <p>© 2026 TimeFlow</p>
-
-    </footer>
+                </div>
 
 
-    <script src="script.js"></script>
+                <div class="timeline-item">
+
+                    <div class="time">
+                        10:00
+                        <small>AM</small>
+                    </div>
+
+                    <div class="timeline-line"></div>
+
+                    <div class="event">
+                        <div class="event-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <div>
+                            <h3>Study / Work</h3>
+                            <p>Focus on your most important task.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="time">
+                        01:00
+                        <small>PM</small>
+                    </div>
+
+                    <div class="timeline-line"></div>
+
+                    <div class="event">
+                        <div class="event-icon">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+
+                        <div>
+                            <h3>Lunch Break</h3>
+                            <p>Take a break and refresh yourself.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="time">
+                        04:00
+                        <small>PM</small>
+                    </div>
+
+                    <div class="timeline-line"></div>
+
+                    <div class="event">
+                        <div class="event-icon">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+
+                        <div>
+                            <h3>Review Progress</h3>
+                            <p>Check your completed and pending tasks.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            <p>TimeFlow © 2026</p>
+            <span>Stay focused • Stay productive</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
+```
+
